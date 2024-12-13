@@ -1,0 +1,42 @@
+#arbol binario contenido general
+#clase que transforma el contenido en un nodo que recibe el nombre y la popularidad
+class Nodocontenido:
+    def __init__(self,nombre,popularidad):
+        self.nombre = nombre
+        self.popularidad = popularidad
+        self.izquierdo = None
+        self.derecho = None
+#arbol que ordena el contenido por la popularidad
+class Arbol_contenido_general:
+    def __init__(self):
+         self.populares=[]
+         self.raiz = None
+    def agregar_nodocontenido(self,nombre,popularidad):
+         if self.raiz is None:
+             self.raiz = Nodocontenido(nombre,popularidad)
+         else:
+             self._agregarnodo(self.raiz,popularidad)
+    def _agregarnodo(self,nodo,popularidad):
+        if self.raiz.popularidad < nodo.popularidad:
+            if nodo.izquierdo is None:
+                nodo.izquierdo = Nodocontenido(popularidad)
+            else:
+                self._agregarnodo(nodo.izquierdo,popularidad)
+        else:
+            if nodo.derechho is None:
+                nodo.derecho = Nodocontenido(popularidad)
+            else:
+                self._agregarnodo(nodo.derecho,popularidad)
+    def mas_populares(self,nodo):
+    
+        if self.raiz is None:
+            return ("no hay contenido para sugerir")
+        else:
+            if self.raiz.popularidad > 200:
+                self.populares.append(self)
+            else:
+               self.mas_populares(nodo.izquierdo)
+               self.mas_populares(nodo.derecho)
+               
+
+arbol1=Arbol_contenido_general()
